@@ -38,12 +38,12 @@ env:
   ECS_CLUSTER: Mynew                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: Hello # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: MY_CONTAINER_NAME           # set this to the name of the container in the
+  CONTAINER_NAME: Ravi-container           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 jobs:
   deploy:
-    name: Deploy
+    name: Build
     runs-on: ubuntu-latest
     environment: production
 
@@ -66,6 +66,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: my-ecr-new
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
